@@ -2,7 +2,8 @@
 --colab/jupyter: https://colab.research.google.com/drive/1j4XdGIU__NYPVpv74vQa9HUOAkxsgUez?usp=sharing
 
 --task1 (lesson5)
--- Компьютерная фирма: Сделать view (pages_all_products), в которой будет постраничная разбивка всех продуктов (не более двух продуктов на одной странице). Вывод: все данные из laptop, номер страницы, список всех страниц
+-- Компьютерная фирма: Сделать view (pages_all_products), в которой будет постраничная разбивка всех продуктов (не более двух продуктов на одной странице). 
+-- Вывод: все данные из laptop, номер страницы, список всех страниц
 
 sample:
 1 1
@@ -15,17 +16,17 @@ sample:
 create view pages_all_products as
 
 select model, 
-	row_number() over (partition by page) as num_product,		-- берём номер страницы из подзапроса в качестве окна и пронумеровываем продукты внутри него
+	row_number() over (partition by page) as num_product,	-- берём номер страницы из подзапроса в качестве окна и пронумеровываем продукты внутри него
 	page
 from (select model, 
-		case 							-- определим номер страницы для каждого продукта (помним, что должно быть не больше двух на одной странице)
-			when num_model % 2 = 0 then num_model/2
-			else num_model/2 + 1
-		end as page
+	     case 						-- определим номер страницы для каждого продукта (помним, что должно быть не больше 2 на одной странице)
+		when num_model % 2 = 0 then num_model/2
+		else num_model/2 + 1
+	     end as page
 	from		
-		(select model,
-			row_number() over (order by model) as num_model 	-- пронумеруем продукты по порядку
-		from product) num_model
+	    (select model,
+		    row_number() over (order by model) as num_model 	-- пронумеруем продукты по порядку
+	    from product) num_model
 	) pages;
 
 
@@ -92,7 +93,10 @@ where class is null
 
 
 --task6 (lesson5)
--- Компьютерная фирма: Вывести все принтеры производителя = 'A' со стоимостью выше средней по принтерам производителя = 'C' и три самых дорогих (через оконные функции). Вывести model
+-- Компьютерная фирма: Вывести все принтеры производителя = 'A' со стоимостью выше средней по принтерам производителя = 'C' и три самых дорогих (через оконные функции).
+-- Вывести model
+
+-- надеюсь, правильно поняла задачу
 
 select pr.model
 from product p join printer pr on p.model = pr.model 
@@ -100,9 +104,8 @@ where maker = 'A'
 	and price > (select avg(price)
 		    from product p join printer pr on p.model = pr.model 
 		    where maker = 'C')		
-
 union 
-	
+
 select model 
 from (select model, 
 	     price,
