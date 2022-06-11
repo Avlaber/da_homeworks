@@ -19,7 +19,7 @@ select model,
 	row_number() over (partition by page) as num_product,	-- берём номер страницы из подзапроса в качестве окна и пронумеровываем продукты внутри него
 	page
 from (select model, 
-	     case 						-- определим номер страницы для каждого продукта (помним, что должно быть не больше 2 на одной странице)
+	     case 						-- определим номер страницы для каждого продукта (помним, что должно быть не больше 2-х на одной странице)
 		when num_model % 2 = 0 then num_model/2
 		else num_model/2 + 1
 	     end as page
@@ -38,7 +38,10 @@ order by model
 
 
 --task2 (lesson5)
--- Компьютерная фирма: Сделать view (distribution_by_type), в рамках которого будет процентное соотношение всех товаров по типу устройства. Вывод: производитель, тип, процент (%)
+-- Компьютерная фирма: Сделать view (distribution_by_type), в рамках которого будет процентное соотношение всех товаров по типу устройства.
+-- Вывод: производитель, тип, процент (%)
+
+-- т.к. в выводе присутствует производитель, добавила его (maker) в окно для расчёта процентного соотношения
 
 create view distribution_by_type as
 
@@ -69,7 +72,7 @@ create table ships_two_words as
 
 select *
 from ships
-where name like '% %' and name not like '% % %';  	-- название корабля состоит из двух слов, не более
+where name like '% %' and name not like '% % %';  	-- название корабля состоит из 2-х слов, но не более (отсекаем те, которые состоят из 3-х слов)
 
 select *
 from ships_two_words
@@ -79,7 +82,6 @@ from ships_two_words
 -- Корабли: Вывести список кораблей, у которых class отсутствует (IS NULL) и название начинается с буквы "S"
 
 with all_ships as			-- все корабли из двух таблиц ships и outcomes
-
 (select name, class
 from ships
 union
@@ -98,7 +100,7 @@ where class is null
 
 -- надеюсь, правильно поняла задачу
 
-select pr.model
+select pr.model								--  среди производителей принтеров нет C, поэтому этот select даёт пустой результат						
 from product p join printer pr on p.model = pr.model 
 where maker = 'A'
 	and price > (select avg(price)
