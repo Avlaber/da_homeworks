@@ -76,37 +76,33 @@ FROM
    
 EXPLAIN select * from randomtable; 
 
--- Вывод:
-/*
+Вывод:
 Seq Scan on randomtable  (cost=0.00..15406.01 rows=1000001 width=12)
-*/
+
 
 EXPLAIN select avg(one) from randomtable; 
 
--- Вывод:
-/*
+Вывод:
 Finalize Aggregate  (cost=11614.56..11614.57 rows=1 width=32)
   ->  Gather  (cost=11614.34..11614.55 rows=2 width=32)
         Workers Planned: 2
         ->  Partial Aggregate  (cost=10614.34..10614.35 rows=1 width=32)
               ->  Parallel Seq Scan on randomtable  (cost=0.00..9572.67 rows=416667 width=4)
-*/
+
 
 EXPLAIN select sum(two) from randomtable; 
 
--- Вывод:
-/*
+Вывод:
 Finalize Aggregate  (cost=11614.55..11614.56 rows=1 width=8)
   ->  Gather  (cost=11614.34..11614.55 rows=2 width=8)
         Workers Planned: 2
         ->  Partial Aggregate  (cost=10614.34..10614.35 rows=1 width=8)
               ->  Parallel Seq Scan on randomtable  (cost=0.00..9572.67 rows=416667 width=4) 
-*/
+
 
 EXPLAIN select sum(two) from randomtable group by three; 
 
--- Вывод:
-/*
+Вывод:
 GroupAggregate  (cost=128738.46..141255.11 rows=501664 width=12)
   Group Key: three
   ->  Sort  (cost=128738.46..131238.46 rows=1000001 width=8)
@@ -115,16 +111,12 @@ GroupAggregate  (cost=128738.46..141255.11 rows=501664 width=12)
 JIT:
   Functions: 7
   Options: Inlining false, Optimization false, Expressions true, Deforming true 
-*/
-
 
 
 --task2 (lesson6, дополнительно)
 -- GCP (Google Cloud Platform): Через GCP загрузите данные csv в базу PSQL по личным реквизитам (используя только bash и интерфейс bash) 
 
--- Alibaba Cloud не понимает команду psql, на любые попытки вызова/узнать/прописать путь отвечает: command not found
-
-
+Alibaba Cloud не понимает команду psql, на любые попытки вызова/узнать/прописать путь отвечает: command not found
 Сама команда на загрузку данных csv в базу:
 
 COPY avocado FROM '/path/to/csv/avocado.csv' WITH (FORMAT csv);
