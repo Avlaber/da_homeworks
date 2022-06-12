@@ -48,9 +48,7 @@ select pall.*,
 	row_number() over (partition by type order by price asc) as price_index
 from all_products pall join product p on pall.model = p.model
 
-
 create index price_index_idx on all_products_with_index_task5(price_index);
-
 
 
 --task1  (lesson6, дополнительно)
