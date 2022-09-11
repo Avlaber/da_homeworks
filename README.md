@@ -31,7 +31,7 @@ Python, Pandas, Numpy, Datetime, Math, Matplotlib, Sklearn
     
 2. Самая пунктуальная авиакомпания на прилёт в Los Angeles International Airport
 
-    - Самой пунктуальной авиакомпаний на прилёт в Los Angeles International Airport оказалась Hawaiian Airlines Inc, в среднем она прилетает раньше расписания на 4.6 минуты.
+    - Самой пунктуальной авиакомпаний на прилёт в Los Angeles International Airport оказалась Hawaiian Airlines Inc., в среднем она прилетает раньше расписания на 4.6 минуты.
     - Среди авиакомпаний с неотрицательной задержкой прилёта лидирует Delta Air Lines Inc., её задержка вылета составляет в среднем 1.4 минуты.
 
 
