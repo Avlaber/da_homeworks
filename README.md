@@ -25,8 +25,8 @@ Python, Pandas, Numpy, Datetime, Math, Matplotlib, Sklearn
 
 1. Аэропорт с минимальной задержкой вылета
 
-- В аэропорту Bert Mooney Airport (город Butte, штат Montana) вылеты происходят с минимальной задержкой от расписания среднем 0.11 минут.
-- А в аэропорту Yakutat Airport (город Yakutat, штат Alaska) самолёты вылетают раньше расписания на 6.3 минуты в среднем.
+    - В аэропорту Bert Mooney Airport (город Butte, штат Montana) вылеты происходят с минимальной задержкой от расписания среднем 0.11 минут.
+    - А в аэропорту Yakutat Airport (город Yakutat, штат Alaska) самолёты вылетают раньше расписания на 6.3 минуты в среднем.
     
     
 2. Самая пунктуальная авиакомпания на прилёт в Los Angeles International Airport
